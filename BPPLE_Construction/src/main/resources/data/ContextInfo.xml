@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextInfo>
+	<context key="Request">
+    	<value>New Construction</value>
+  	</context>
+  	<context key="Purpose">
+    	<value>Office</value>
+  	</context> 
+ </contextInfo>

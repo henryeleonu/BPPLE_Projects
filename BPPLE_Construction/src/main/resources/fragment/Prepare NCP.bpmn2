@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- origin at X=0.0 Y=0.0 -->
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://www.java.com/javaTypes" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.3.3.Final-v20170221-1647-B60" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:process id="defaultPackage.Prepare_NCP" tns:packageName="defaultPackage" name="Prepare NCP" isExecutable="true" processType="Private">
+    <bpmn2:startEvent id="StartEvent_1PrepareNCP" name="StartProcess">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[StartProcess]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>SequenceFlow_1PrepareNCP</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="ScriptTask_1PrepareNCP" name="Prepare NCP" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Prepare NCP]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_1PrepareNCP</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2PrepareNCP</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;&quot;);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1PrepareNCP" tns:priority="1" sourceRef="StartEvent_1PrepareNCP" targetRef="ScriptTask_1PrepareNCP"/>
+    <bpmn2:endEvent id="EndEvent_1PrepareNCP" name="End Event 1PrepareNCP">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[End Event 1]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_2PrepareNCP</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_2PrepareNCP" tns:priority="1" sourceRef="ScriptTask_1PrepareNCP" targetRef="EndEvent_1PrepareNCP"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1PrepareNCP">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_1PrepareNCP" bpmnElement="defaultPackage.Prepare_NCP">
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1PrepareNCP" bpmnElement="StartEvent_1PrepareNCP">
+        <dc:Bounds height="0.0" width="0.0" x="45.0" y="45.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="15.0" width="71.0" x="28.0" y="81.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_1PrepareNCP" bpmnElement="ScriptTask_1PrepareNCP" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="186.0" y="38.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="15.0" width="73.0" x="204.0" y="55.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1PrepareNCP" bpmnElement="EndEvent_1PrepareNCP">
+        <dc:Bounds height="36.0" width="36.0" x="364.0" y="45.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="15.0" width="65.0" x="350.0" y="81.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1PrepareNCP" bpmnElement="SequenceFlow_1PrepareNCP" sourceElement="BPMNShape_StartEvent_1PrepareNCP" targetElement="BPMNShape_ScriptTask_1PrepareNCP">
+        <di:waypoint xsi:type="dc:Point" x="81.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="133.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="186.0" y="63.0"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2PrepareNCP" bpmnElement="SequenceFlow_2PrepareNCP" sourceElement="BPMNShape_ScriptTask_1PrepareNCP" targetElement="BPMNShape_EndEvent_1PrepareNCP">
+        <di:waypoint xsi:type="dc:Point" x="296.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="330.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="364.0" y="63.0"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

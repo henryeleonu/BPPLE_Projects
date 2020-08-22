@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- origin at X=0.0 Y=0.0 -->
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://www.java.com/javaTypes" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.3.3.Final-v20170221-1647-B60" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="ItemDefinition_1" isCollection="false" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="ItemDefinition_10" isCollection="false" structureRef="java.lang.Object"/>
+  <bpmn2:process id="defaultPackage.ConstructionPlanReference" tns:packageName="defaultPackage" name="ConstructionPlanReference" isExecutable="true" processType="Private">
+    <bpmn2:extensionElements>
+      <tns:global identifier="messageFromFragment" type="java.lang.Object"/>
+    </bpmn2:extensionElements>
+    <bpmn2:property id="contextInfo" itemSubjectRef="ItemDefinition_10" name="contextInfo"/>
+    <bpmn2:property id="nameOfSubProcess" itemSubjectRef="ItemDefinition_1" name="nameOfSubProcess"/>
+    <bpmn2:property id="fragmentID" itemSubjectRef="ItemDefinition_1" name="fragmentID"/>
+    <bpmn2:property id="messageFrag" itemSubjectRef="ItemDefinition_1" name="messageFrag"/>
+    <bpmn2:startEvent id="StartEvent_1" name="StartProcess">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[StartProcess]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="ScriptTask_1" name="Register Plan" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Register Plan]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;&quot;);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" tns:priority="1" sourceRef="StartEvent_1" targetRef="ScriptTask_1"/>
+    <bpmn2:subProcess id="SubProcess_2" name="Prepare Plan">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Prepare Plan]]></tns:metaValue>
+        </tns:metaData>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+com.sample.ContextInfo ci = (com.sample.ContextInfo)kcontext.getVariable(&quot;contextInfo&quot;);
+ci.setAbstractContainerAttrValue(&quot;Prepare Plan&quot;);
+kcontext.setVariable(&quot;contextInfo&quot;, ci);
+
+</tns:script>
+        </tns:onEntry-script>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
+    </bpmn2:subProcess>
+    <bpmn2:subProcess id="SubProcess_3" name="Examine Plan">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Examine Plan]]></tns:metaValue>
+        </tns:metaData>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+com.sample.ContextInfo ci = (com.sample.ContextInfo)kcontext.getVariable(&quot;contextInfo&quot;);
+ci.setAbstractContainerAttrValue(&quot;Examine Plan&quot;);
+kcontext.setVariable(&quot;contextInfo&quot;, ci);
+
+</tns:script>
+        </tns:onEntry-script>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+    </bpmn2:subProcess>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" tns:priority="1" sourceRef="SubProcess_2" targetRef="SubProcess_3"/>
+    <bpmn2:scriptTask id="ScriptTask_2" name="Approve Plan" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Approve Plan]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;&quot;);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" tns:priority="1" sourceRef="SubProcess_3" targetRef="ScriptTask_2"/>
+    <bpmn2:endEvent id="EndEvent_1" name="End Event 1">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[End Event 1]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" tns:priority="1" sourceRef="ScriptTask_2" targetRef="EndEvent_1"/>
+    <bpmn2:task id="Task_1" tns:taskName="PauseNode" tns:displayName="PauseNode" tns:icon="task.png" name="PauseNode">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[PauseNode]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_1">
+        <bpmn2:dataInput id="DataInput_1" itemSubjectRef="ItemDefinition_1" name="Message"/>
+        <bpmn2:inputSet id="_InputSet_2">
+          <bpmn2:dataInputRefs>DataInput_1</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_1" name="Output Set 1"/>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="_DataInputAssociation_2">
+        <bpmn2:targetRef>DataInput_1</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" tns:priority="1" sourceRef="ScriptTask_1" targetRef="Task_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_10" tns:priority="1" sourceRef="Task_1" targetRef="SubProcess_2"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="defaultPackage.ConstructionPlanReference">
+      <bpmndi:BPMNShape id="BPMNShape_SubProcess_2" bpmnElement="SubProcess_2" isExpanded="true">
+        <dc:Bounds height="104.0" width="131.0" x="390.0" y="17.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_1">
+          <dc:Bounds height="15.0" width="72.0" x="396.0" y="20.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_SubProcess_3" bpmnElement="SubProcess_3" isExpanded="true">
+        <dc:Bounds height="102.0" width="141.0" x="570.0" y="19.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_2">
+          <dc:Bounds height="15.0" width="76.0" x="576.0" y="22.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="10.0" y="45.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_3">
+          <dc:Bounds height="15.0" width="71.0" x="-7.0" y="81.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_1" bpmnElement="ScriptTask_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="80.0" y="38.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_4">
+          <dc:Bounds height="15.0" width="75.0" x="97.0" y="55.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_2" bpmnElement="ScriptTask_2" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="750.0" y="38.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_5">
+          <dc:Bounds height="15.0" width="72.0" x="769.0" y="55.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="888.0" y="45.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_6">
+          <dc:Bounds height="15.0" width="65.0" x="874.0" y="81.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Task_1" bpmnElement="Task_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="230.0" y="45.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_7">
+          <dc:Bounds height="15.0" width="66.0" x="252.0" y="62.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_ScriptTask_1">
+        <di:waypoint xsi:type="dc:Point" x="46.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="63.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="80.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_8"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_SubProcess_2" targetElement="BPMNShape_SubProcess_3">
+        <di:waypoint xsi:type="dc:Point" x="521.0" y="69.0"/>
+        <di:waypoint xsi:type="dc:Point" x="545.0" y="69.0"/>
+        <di:waypoint xsi:type="dc:Point" x="570.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_9"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="BPMNShape_SubProcess_3" targetElement="BPMNShape_ScriptTask_2">
+        <di:waypoint xsi:type="dc:Point" x="711.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="730.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="730.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="750.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_10"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_ScriptTask_2" targetElement="BPMNShape_EndEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="860.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="874.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="888.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_11"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="BPMNShape_ScriptTask_1" targetElement="BPMNShape_Task_1">
+        <di:waypoint xsi:type="dc:Point" x="190.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="210.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="210.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="230.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_12"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="BPMNShape_Task_1" targetElement="BPMNShape_SubProcess_2">
+        <di:waypoint xsi:type="dc:Point" x="340.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="365.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="390.0" y="69.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_13"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
